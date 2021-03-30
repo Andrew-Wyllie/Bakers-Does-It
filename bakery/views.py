@@ -1,32 +1,63 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def index(request):
-    return HttpResponse("Bakers Does It Yall!!")
+
+    context_dict = {'boldmessage': 'Love to bake!'}
+
+    return render(request, 'bakery/index.html', context= context_dict)
 
 def signup(request):
-    return HttpResponse("sign up page")
+
+    context_dict = {'boldmessage': 'Sign Up'}
+
+    return render(request, 'bakery/signup.html', context= context_dict)
 
 def post(request):
-    return HttpResponse("posts page")
+
+    context_dict = {'boldmessage':'Posts'}
+
+    return render(request, 'bakery/post.html', context=context_dict)
 
 def search(request):
-    return HttpResponse("Search Page")
+    
+    context_dict = {'boldmessage':'Search'}
+
+    return render(request, 'bakery/search.html', context=context_dict)
 
 def question(request):
-    return HttpResponse("Question Page")
+
+    context_dict = {'boldmessage':'Questions'}
+
+    return render(request, 'bakery/question.html', context=context_dict)
 
 def comment(request):
-    return HttpResponse("Comment page")
+
+    context_dict = {'boldmessage':'Comments'}
+
+    return render(request, 'bakery/comment.html', context=context_dict)
 
 def login(request):
-    return HttpResponse("Login page")
+
+    context_dict = {'boldmessage':'Login'}
+
+    return render(request, 'bakery/login.html', context=context_dict)
 
 def myaccount(request):
-    return HttpResponse("My Account")
+
+    context_dict = {'boldmessage':'My Account'}
+
+    return render(request, 'bakery/myaccount.html', context=context_dict)
 
 def myquestions(request):
-    return HttpResponse("My Questions")
+
+    context_dict = {'boldmessage':'My Questions'}
+
+    return render(request, 'bakery/myquestions.html', context=context_dict)
 
 def contact(request):
-    return HttpResponse("Contact Page.")
+
+    context_dict = {'boldmessage':'Contact Us'}
+
+    return render(request, 'bakery/contact.html', context=context_dict)
