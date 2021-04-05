@@ -1,8 +1,14 @@
 <!DOCTYPE html>
+
+{% load staticfiles %}
+
 <html>
 
     <head>
         <title>Bakers Does It</title>
+
+        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+        <script src="{% static 'js/jquery.js' &}"></script>"
     </head>
 
     <body>
@@ -10,18 +16,27 @@
         <div>
             Bakerys <br />
             <strong>{{ boldmessage }}</strong><br />
-        </div>
+            {% if user.is_authenticated %}
+                howdy {{ user.username }}!
+            {% else %}
+                hey there partner!
+            {% endif %}
+
+        </div>   
+
         <div>
-            <a href="/">Home Page</a><br />
-            <a href="/bakery/login/">login Page</a><br />
-            <a href="/bakery/login/myaccount/">My Account Page</a><br />
-            <a href="/bakery/login/myquestions/">My Questions Page</a><br />
-            <a href="/bakery/signup/">signup Page</a><br />
-            <a href="/bakery/post/">post Page</a><br />
-            <a href="/bakery/search/">search Page</a><br />
-            <a href="/bakery/search/question/">question Page</a><br />
-            <a href="/bakery/search/question/comment/">comment Page</a><br />
-            <a href="/bakery/contact/">Contact Page</a><br />
+            <li><a href="/">Home Page</a></li>
+            <li><a href="{% url 'bakery:login' %}">Login</a></li>
+            <li><a href="/bakery/login/myaccount/">My Account Page</a></li>
+            <li><a href="/bakery/login/myquestions/">My Questions Page</a></li>
+            <li><a href="/bakery/signup/">signup Page</a></li>
+            <li><a href="/bakery/post/">post Page</a></li>
+            <li><a href="/bakery/search/">search Page</a></li>
+            <li><a href="/bakery/search/question/">question Page</a></li>
+            <li><a href="/bakery/search/question/comment/">comment Page</a></li>
+            <li><a href="/bakery/contact/">Contact Page</a></li>
+            <img src='{% static "images/bread.jpg" %}''
+                alt="Picture of bread" />
         </div>
     </body>   
 </html>

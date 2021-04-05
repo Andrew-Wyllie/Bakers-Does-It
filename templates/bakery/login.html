@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html>
-
-    <head>
-        <title>Bakers Does It</title>
-    </head>
-
-    <body>
-        <h1></h1>
-        <div>
-            Bakerys <br />
-            <strong>{{ boldmessage }}</strong><br />
-        </div>
-        <div>
-            <a href="/">Home Page</a><br />
-            <a href="/bakery/login/myaccount/">My Account Page</a><br />
-            <a href="/bakery/login/myquestions/">My Questions Page</a><br />
-            <a href="/bakery/signup/">signup Page</a><br />
-        </div>
-    </body>   
-</html>
+{% extends 'bakery/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+Login
+{% endblock %}
+{% block body_block %}
+<h1>Login to Bakers Does It</h1>
+<form id="login_form" method="post" action="{% url 'bakery:login' %}">
+    {% csrf_token %}
+    Username: <input type="text" name="username" value="" size="50" />
+    <br />
+    Password: <input type="password" name="password" value="" size="50" />
+    <br />
+    <input type="submit" value="submit" />
+</form>
+<div>
+    <a href="/">Home Page</a><br />
+    <a href="/bakery/login/myaccount/">My Account Page</a><br />
+    <a href="/bakery/login/myquestions/">My Questions Page</a><br />
+    <a href="/bakery/signup/">signup Page</a><br />
+</div>
+{% endblock %}
+    

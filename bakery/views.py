@@ -1,18 +1,57 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.urls import reverse
+from django.shortcuts import redirect
+from bakery.models import Category
+from bakery.models import Page
+from bakery.forms import UserForm, UserProfileForm
 
 def index(request):
 
-    context_dict = {'boldmessage': 'Love to bake!'}
+    category_list = Category.objects
+
+    context_dict = {}
+    context_dict['boldmessage'] =  'Love to bake!'
+    context_dict['categories'] = category_list
 
     return render(request, 'bakery/index.html', context= context_dict)
 
-def signup(request):
+def register(request):
+    
+    registered = False
 
-    context_dict = {'boldmessage': 'Sign Up'}
+    if request.method == 'POST':
+ 
+        user_form = UserForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
 
-    return render(request, 'bakery/signup.html', context= context_dict)
+
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+
+            if 'picture' in request.FILES:
+                
+                profile.picture = request.FILES['picture']
+
+            profile.save()
+
+            registered = True
+        else:
+
+            print(user_form.errors, profile_form.errors)
+    else:
+
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+
+    return render(request, 'bakery/signup.html' , context = {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 def post(request):
 
@@ -38,11 +77,34 @@ def comment(request):
 
     return render(request, 'bakery/comment.html', context=context_dict)
 
-def login(request):
+def user_login(request):
 
-    context_dict = {'boldmessage':'Login'}
+    if request.method == 'POST':
 
-    return render(request, 'bakery/login.html', context=context_dict)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+
+            if user.is_active:
+
+                login(request, user)
+                return redirect(reverse('rango:index'))
+            else:
+
+                return HttpResponse("Your Bakers Does It account is disabled.")
+        
+        else:
+
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details supplied.")
+
+
+    else:
+
+        return render(request, 'bakery/login.html')
 
 def myaccount(request):
 
@@ -61,3 +123,18 @@ def contact(request):
     context_dict = {'boldmessage':'Contact Us'}
 
     return render(request, 'bakery/contact.html', context=context_dict)
+
+def show_category(request, category_name_slug):
+
+    context_dict = {}
+    
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['pages'] = None
+    
+    return render(request, 'bakery/category.html')
