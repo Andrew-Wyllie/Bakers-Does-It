@@ -8,11 +8,23 @@
         <title>Bakers Does It</title>
 
         <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-        <script src="{% static 'js/jquery.js' &}"></script>"
+        <script src="{% static 'js/jquery.js' &}"></script>
     </head>
 
     <body>
         <h1></h1>
+		<div>
+		<a href="/" style = "position: relative;
+			border: 5px solid gray">Home Page</a><br />
+		<a href="{% url 'bakery:login' %}", style = "position: relative;
+			left: 1800px; border: 5px solid gray; top: -20px">Login</a> <br />
+			<a href="/bakery/signup/" style = "position: relative;
+			left: 1800px; border: 5px solid gray; top: -10px">Sign Up</a><br />
+		<h1 style="font-size: 50px; color:gray;  position: relative;
+			left: 800px; ">Bakers Does It?</h1>
+		<img src="{% static 'images/Bread-Banner.jpg' %}" alt="Banner" style = "position: relative;
+			left: -20px;" /> 
+		</div>
         <div>
             Bakerys <br />
             <strong>{{ boldmessage }}</strong><br />
@@ -25,18 +37,14 @@
         </div>   
 
         <div>
-            <li><a href="/">Home Page</a></li>
-            <li><a href="{% url 'bakery:login' %}">Login</a></li>
             <li><a href="/bakery/login/myaccount/">My Account Page</a></li>
             <li><a href="/bakery/login/myquestions/">My Questions Page</a></li>
-            <li><a href="/bakery/signup/">signup Page</a></li>
             <li><a href="/bakery/post/">post Page</a></li>
             <li><a href="/bakery/search/">search Page</a></li>
             <li><a href="/bakery/search/question/">question Page</a></li>
             <li><a href="/bakery/search/question/comment/">comment Page</a></li>
             <li><a href="/bakery/contact/">Contact Page</a></li>
-            <img src='{% static "images/bread.jpg" %}''
-                alt="Picture of bread" />
         </div>
     </body>   
 </html>
+
