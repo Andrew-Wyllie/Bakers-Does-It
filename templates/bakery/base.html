@@ -3,18 +3,29 @@
 <html>
     <head>
         <title>
-            Bakery -
+         Bakery -
             {% block title_block %}
                 Bakers Does It
             {% endblock %}
-        </title>
+        </title> 
     </head>
 
     <body>
-        <div>
-        {% block body_block %}
-        {% endblock %}
-        </div>
+	
+		<div>
+		{% block body_block %}
+		{% endblock %}
+		<a href="/" style = "position: relative;
+			border: 5px solid gray">Home Page</a><br />
+		<a href="/bakery/login/", style = "position: relative;
+			left: 1800px; border: 5px solid gray">Login</a> <br />
+			<a href="/bakery/signup/" style = "position: relative;
+			left: 1800px; border: 5px solid gray; top: 10px">Sign Up</a><br />
+        <h1 style="font-size: 50px; color:gray;  position: relative;
+			left: 800px; ">Baker's Does It? </h1>
+		<img src="{% static 'images/Bread-Banner.jpg' %}" alt="Banner" style = "position: relative;
+			left: -20px;" /> 
+		</div>
         <hr />
         <div>
             <ul>
